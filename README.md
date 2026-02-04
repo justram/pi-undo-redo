@@ -2,6 +2,9 @@
 
 This extension adds buffered undo/redo support to pi sessions by running tools inside a sandbox and restoring file snapshots when you navigate between conversation branches.
 
+https://github.com/user-attachments/assets/d9335a48-1c14-4329-8948-1794e85b1456
+
+
 ## What it does
 
 - Wraps built-in tools (`read`, `edit`, `write`, `bash`, `grep`, `find`, `ls`) so file operations happen in a sandbox.

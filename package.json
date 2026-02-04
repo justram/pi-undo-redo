@@ -1,6 +1,6 @@
 {
 	"name": "@justram/pi-undo-redo",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Buffered undo/redo extension for Pi coding agent",
 	"keywords": [
 		"pi-package",

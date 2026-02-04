@@ -1,8 +1,8 @@
 import { CustomEditor } from "@mariozechner/pi-coding-agent";
 import { type KeyId, matchesKey } from "@mariozechner/pi-tui";
 
-const DEFAULT_UNDO_KEYS: KeyId[] = ["ctrl+u"];
-const DEFAULT_REDO_KEYS: KeyId[] = ["ctrl+shift+u"];
+const DEFAULT_UNDO_KEYS: KeyId[] = ["ctrl+shift+z"];
+const DEFAULT_REDO_KEYS: KeyId[] = ["ctrl+shift+y"];
 
 function normalizeKeys(
 	keys: KeyId | KeyId[] | undefined,

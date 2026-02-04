@@ -53,6 +53,7 @@ Once loaded, tools operate in the sandbox automatically. The status bar shows th
 - `/undo` — Navigate to the previous leaf and restore buffered files.
 - `/redo` — Navigate to the next leaf and restore buffered files.
 - `/diff-stack` — Inspect buffered diffs per leaf (UI only).
+- `/undo-redo-clear-cache` — Clear the undo/redo extension cache for the current session (snapshots, diffs, and sandbox) and reset history.
 
 ### LLM tool
 
@@ -69,15 +70,15 @@ The extension exposes a tool named `undo_redo` so the LLM can manage undo/redo a
 
 The extension keeps the standard pi editor behavior and adds undo/redo shortcuts:
 
-- `ctrl+u`: undo (runs `/undo`)
-- `ctrl+shift+u`: redo (runs `/redo`)
+- `ctrl+shift+z`: undo (runs `/undo`)
+- `ctrl+shift+y`: redo (runs `/redo`)
 
 You can customize these in `~/.pi/agent/keybindings.json` using these keys:
 
 ```json
 {
-  "treeUndo": "ctrl+u",
-  "treeRedo": "ctrl+shift+u"
+  "treeUndo": "ctrl+shift+z",
+  "treeRedo": "ctrl+shift+y"
 }
 ```
 
@@ -90,7 +91,7 @@ You can customize these in `~/.pi/agent/keybindings.json` using these keys:
 ## Session behavior
 
 - Each pi session gets its own cache root keyed by session ID.
-- `/resume` reuses the same session ID, so cached snapshots and the sandbox are reused. Undo/redo stacks are reset on load.
+- `/resume` reuses the same session ID, so cached snapshots and the sandbox are reused. Undo/redo stacks are reset on load, so undo/redo is unavailable until new changes are recorded.
 - `/fork` creates a new session ID, so the extension re-initializes with a fresh sandbox/cache for the forked session.
 
 ## Cache layout

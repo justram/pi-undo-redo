@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { StringEnum } from "@mariozechner/pi-ai";
 import {
@@ -603,6 +603,27 @@ export default function (pi: ExtensionAPI) {
 		updateStatus(tracker.getTrackedStats(), uiContext);
 		return sessionState;
 	};
+
+	pi.registerCommand("undo-redo-clear-cache", {
+		description:
+			"Clear the undo/redo extension cache (snapshots, diffs, sandbox) for the current session",
+		handler: async (_args: string, ctx: ExtensionCommandContext) => {
+			const session = ensureState(ctx);
+			if (!session) return;
+			try {
+				await rm(session.cache.root, { recursive: true, force: true });
+				state = await initializeSession(ctx);
+				notify(
+					ctx,
+					"Undo/redo cache cleared. Undo/redo history has been reset.",
+					"info",
+				);
+			} catch (error) {
+				const message = error instanceof Error ? error.message : String(error);
+				notify(ctx, `Failed to clear undo/redo cache: ${message}`, "error");
+			}
+		},
+	});
 
 	const initializeFromContext = async (
 		ctx: ExtensionContext,
